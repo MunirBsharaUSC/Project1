@@ -14,12 +14,15 @@ class Date{
 
 private:
     string date;
+    int month;
+    int year;
+    int day;
 
 public:
     Date();
     ~Date();
     Date(string date);
-    string getMonth(string month);
+    string getMonth();
     string getDate();
     void print_date(string format = "Month D, YYYY");
     bool operator==(const Date& rhs);

@@ -52,7 +52,7 @@ void Phone::set_contact(){
 }
 
 
-string Phone::get_contact(string style){
+string Phone::get_contact(string style){ // TODO: fix up substring thingy, by adding condition in print
     // TODO: Complete this method, get hint from Email
     if (style=="full")
         return "(" + type + ") " + phone_num;
@@ -60,11 +60,17 @@ string Phone::get_contact(string style){
         return "(" + type + "): " + phone_num.substr(0,3) + "-" + phone_num.substr(3,3) + "-" + phone_num.substr(6,4);
 
     else
-        return phone_num; // FIX ME
+        return "(" + type + "): " + phone_num;; // FIX ME
 }
 
 
 void Phone::print(){
     // Note: get_contact is called with default argument
-    cout << get_contact("colon") << endl;
+    if(phone_num.size()==10){
+        cout << get_contact("colon") << endl;
+    }
+    else{
+        cout << get_contact("NULL") << endl;
+    }
+
 }

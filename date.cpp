@@ -8,59 +8,79 @@ Date::Date() {}
 
 Date::~Date() {}
 
-Date::Date(string date):date(date){}
+Date::Date(string date):date(date){
+    int counter=0;
+    string temp;
+    int slashCounter=0;
+    while(date[counter]){
+        if(date[counter]=='/'){
+            if(slashCounter==0){
+                month = stoi(temp);
+                slashCounter++;
+                temp="";
+            } else if(slashCounter==1){
+
+                day = stoi(temp);
+                temp="";
+                slashCounter++;
+            }
+        } else{
+            temp=temp + date[counter];
+        }
+        counter++;
+    }
+        year = stoi(temp);
+}
 
 bool Date::operator==(const Date& rhs){
     // TODO: Complete this method!
     // Note: you should check first name, last name and birthday between two persons
     // refer to bool Date::operator==(const Date& rhs)
-    return date==rhs.date;
+    return (year==rhs.year) && (day==rhs.day) && (month==rhs.month);
 }
 
-string Date::getMonth(string month){
-    int monthInInt = stoi(month);
-    switch (monthInInt) {
+string Date::getMonth(){
+    switch (month) {
         case 1:
-            month = "January";
+            return "January";
             break;
         case 2:
-            month = "February";
+            return"February";
             break;
         case 3:
-            month = "March";
+            return "March";
             break;
         case 4:
-            month = "April";
+            return "April";
             break;
         case 5:
-            month = "May";
+            return "May";
             break;
         case 6:
-            month = "June";
+            return "June";
             break;
         case 7:
-            month = "July";
+            return "July";
             break;
         case 8:
-            month = "August";
+            return "August";
             break;
         case 9:
-            month = "September";
+            return "September";
             break;
         case 10:
-            month = "October";
+            return "October";
             break;
         case 11:
-            month = "November";
+            return "November";
             break;
         case 12:
-            month = "December";
+            return "December";
             break;
         default:
-            month = "INVALID MONTH";
+            return "INVALID MONTH";
             break;
     }
-    return month;
 }
 
 string Date::getDate() {
@@ -69,27 +89,9 @@ string Date::getDate() {
 
 void Date::print_date(string format) {
     if(format == "Month D, YYYY"){
-        int counter=0;
-        string temp;
-        int slashCounter=0;
-        while(date[counter]){
-            if(date[counter]=='/'){
-                if(slashCounter==0){
-                    cout << getMonth(temp) << " ";
-                    slashCounter++;
-                    temp="";
-                } else if(slashCounter==1){
-
-                    cout << temp << ", ";
-                    temp="";
-                    slashCounter++;
-                }
-            } else{
-                temp=temp + date[counter];
-            }
-            counter++;
-        }
-        cout << temp << endl;
+        cout << getMonth() << " ";
+        cout << day << ", ";
+        cout << year << endl;
     }
     else{
         cout << date << endl;
