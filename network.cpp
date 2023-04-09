@@ -236,7 +236,6 @@ void Network::showMenu(){
     while(1){
         cout << "\033[2J\033[1;1H";
         printMe("banner"); // from misc library
-        printDB();
         cout << "Select from below: \n";
         cout << "1. Save network database \n";
         cout << "2. Load network database \n";
