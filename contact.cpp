@@ -1,4 +1,5 @@
 #include "contact.h"
+#include <algorithm>
 // TODO: Add needed libraries! PHONE NUMBER? DEFUALT ARGUMENT?
 
 Email::Email(string type, string email_addr): email_addr(email_addr){
@@ -34,10 +35,22 @@ void Email::print(){
 }
 
 
-Phone::Phone(string type, string num): phone_num(num){ //CHECK PHONE NUMBER
+Phone::Phone(string type, string num) { //CHECK PHONE NUMBER
     // TODO: It is possible that num includes "-" or not, manage it!
     // TODO: Complete this method!
     // Note: We don't want to use C++11! stol is not valid!
+    int size = num.size();
+    int dash = count(num.begin(), num.end(), '-');
+    remove(num.begin(),num.end(), '-'); // in case of dash
+    int spaces = count(num.begin(), num.end(), ' ');
+    remove(num.begin(),num.end(),' '); // in case of space between segments
+    int openParenth = count(num.begin(), num.end(), '(');
+    remove(num.begin(),num.end(),'(');
+    int closeParenth = count(num.begin(), num.end(), ')');
+    remove(num.begin(),num.end(),')'); // In case of area code using parenthesis
+    num.resize(size-dash-spaces-openParenth-closeParenth);
+    cout << num;
+    phone_num=num;
     Contact::type=type;
 }
 

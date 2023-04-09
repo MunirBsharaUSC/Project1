@@ -1,7 +1,7 @@
 #include "network.h"
 #include <limits>
 #include "misc.h"
-#include <fstream>
+
 
 
 Network::Network(){
@@ -19,7 +19,6 @@ Network::Network(string fileName){
 }
 
 Network::~Network(){
-    // Should i delete that stuff
     Person* ptr = head;
     Person* temp = NULL;
     while(ptr != NULL){
@@ -28,7 +27,9 @@ Network::~Network(){
         ptr = temp;
     }
     delete temp;
+    //temp = NULL;
     delete ptr;
+    //ptr = NULL;
 }
 
 Person* Network::search(Person* searchEntry){
@@ -127,6 +128,10 @@ void Network::saveDB(string filename){
     myfile.open(filename); // FIXME, DOES THIS MEAN THAT I NEED TO PRINT EVERYTHING TO FILENAME
 
     Person* ptr = head;
+    if(ptr == NULL){
+        cout << "Your database has no one in it, we will not permit you saving nothing into a file" << endl;
+        return ;
+    }
     while(ptr != NULL){
         myfile << ptr->f_name << endl;
         myfile << ptr->l_name << endl;
@@ -200,12 +205,15 @@ bool Network::remove(string fname, string lname){
         if(p==head){
             head = p->next;
         }
-        if(p->next != NULL){
+        //TESTING HERE
+        /*
+         * if(p->next != NULL){
             p->next->prev = p->prev;
         }
         if(p->prev != NULL){
             p->prev->next = p->next;
         }
+         */
 
         count--;
         delete p;

@@ -7,6 +7,12 @@ Person::Person(){
 
 
 Person::~Person(){
+    if(next != NULL){
+        next->prev = prev;
+    }
+    if(prev != NULL){
+        prev->next = next;
+    }
     delete birthdate;
     delete email;
     delete phone;
@@ -17,7 +23,6 @@ Person::~Person(){
 Person::Person(string f_name, string l_name, string b_date, string email, string phone): f_name(f_name), l_name(l_name){
     // TODO: Complete this method!
 
-    //b_date
     birthdate = new Date(b_date); // What does full version mean
     string temp ="";
     string type ="";
